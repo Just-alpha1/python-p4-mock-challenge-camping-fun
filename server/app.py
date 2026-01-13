@@ -44,7 +44,7 @@ class CamperById(Resource):
         camper = Camper.query.filter_by(id=id).first()
         if not camper:
             return {"error": "Camper not found"}, 404
-        return camper.to_dict(), 200
+        return camper.to_dict(rules=('signups', '-signups.camper', '-signups.activity.signups')), 200
 
     def patch(self, id):
         camper = Camper.query.filter_by(id=id).first()
